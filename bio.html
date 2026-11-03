@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="ROMA - Conheça nossas ferramentas e soluções.">
+<title>ROMA | Meus Produtos</title>
+
+<style>
+/* ==========================================================
+   ESTILOS
+   As cores principais vêm da CONFIG (JavaScript) via variáveis CSS.
+   ========================================================== */
+:root {
+  --bg: #0D0716;
+  --neon: #A855F7;
+  --neon-rgb: 168, 85, 247;
+  --text: #F3E8FF;
+  --muted: #B9A3D6;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+/* Canvas de fundo com folhas, raízes e partículas */
+#bg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Brilhos roxos discretos que se movem devagar */
+.glow {
+  position: fixed;
+  width: 55vmax;
+  height: 55vmax;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(var(--neon-rgb), 0.18), transparent 70%);
+  filter: blur(40px);
+  z-index: 0;
+  pointer-events: none;
+  animation: drift 20s ease-in-out infinite alternate;
+}
+.glow.g1 { top: -18vmax; left: -15vmax; }
+.glow.g2 { bottom: -22vmax; right: -18vmax; animation-delay: -8s; }
+
+@keyframes drift {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(5vmax, 4vmax); }
+}
+
+/* Conteúdo principal */
+main {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+  min-height: 100vh;
+  padding: 56px 22px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Foto ou logotipo */
+.avatar {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  border: 2px solid var(--neon);
+  background: #1A0F2B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--neon);
+  animation: pulse 4s ease-in-out infinite;
+}
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 16px rgba(var(--neon-rgb), 0.35); }
+  50%      { box-shadow: 0 0 34px rgba(var(--neon-rgb), 0.6); }
+}
+
+.brand {
+  margin-top: 20px;
+  font-size: 0.8rem;
+  letter-spacing: 6px;
+  color: var(--neon);
+  text-transform: uppercase;
+}
+
+h1 {
+  margin-top: 8px;
+  font-size: clamp(1.5rem, 6vw, 2rem);
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-align: center;
+  text-shadow: 0 0 18px rgba(var(--neon-rgb), 0.55);
+}
+
+.subtitle {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* Lista de botões */
+.links {
+  width: 100%;
+  margin-top: 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.btn {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 20px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(var(--neon-rgb), 0.5);
+  background: linear-gradient(135deg, rgba(var(--neon-rgb), 0.16), rgba(88, 28, 135, 0.28));
+  color: var(--text);
+  text-decoration: none;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Reflexo de brilho que passa pelo botão */
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.7s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  border-color: var(--neon);
+  box-shadow: 0 0 26px rgba(var(--neon-rgb), 0.5);
+  background: linear-gradient(135deg, rgba(var(--neon-rgb), 0.3), rgba(88, 28, 135, 0.4));
+}
+
+.btn:hover::before { left: 125%; }
+
+.btn:focus-visible {
+  outline: 2px solid var(--neon);
+  outline-offset: 4px;
+}
+
+/* Efeito ao clicar */
+.btn:active {
+  transform: scale(0.97);
+  transition-duration: 0.1s;
+}
+
+/* Rodapé */
+footer {
+  margin-top: auto;
+  padding-top: 40px;
+  font-size: 0.72rem;
+  letter-spacing: 1.5px;
+  color: #7E6A99;
+  text-align: center;
+}
+
+/* Respeita quem prefere menos animação */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Fundo animado -->
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="glow g1" aria-hidden="true"></div>
+<div class="glow g2" aria-hidden="true"></div>
+
+<main>
+  <div class="avatar" id="avatar"></div>
+  <div class="brand" id="brand"></div>
+  <h1 id="title"></h1>
+  <p class="subtitle" id="subtitle"></p>
+
+  <nav class="links" id="links" aria-label="Produtos"></nav>
+
+  <footer id="footer"></footer>
+</main>
+
+<script>
+/* ==========================================================
+   ÁREA DE CONFIGURAÇÃO
+   Edite apenas este bloco para trocar nomes, links, cores e textos.
+   ========================================================== */
+const CONFIG = {
+  // Nome da marca exibido acima do título
+  brandName: "ROMA",
+
+  // Foto ou logotipo: coloque o caminho ou URL da imagem.
+  // Exemplo: "minha-foto.jpg" ou "https://exemplo.com/logo.png"
+  // Se deixar vazio, aparecerão as iniciais abaixo.
+  avatarImage: "",
+  avatarInitials: "R",
+
+  // Textos do cabeçalho
+  title: "MEUS PRODUTOS",
+  subtitle: "Conheça nossas ferramentas e soluções",
+
+  // Texto do rodapé
+  footer: "© 2026 - TODOS OS DIREITOS RESERVADOS",
+
+  // Cores (formato hexadecimal)
+  colors: {
+    background: "#0D0716",
+    neon: "#A855F7"
+  },
+
+  // Produtos: cada um vira um botão, na ordem da lista.
+  // Os nomes são exibidos em maiúsculas automaticamente.
+  products: [
+    { name: "VYRON",     url: "https://pay.cakto.com.br/gz8x62x_1273057" },
+    { name: "FPS BOOST", url: "https://pay.cakto.com.br/395bycr_1273043" },
+    { name: "NITROX",    url: "https://pay.cakto.com.br/kwk439s_1273041" },
+    { name: "AXEUS",     url: "https://pay.cakto.com.br/8ycv4qk_1272729" },
+    { name: "DISCORD",   url: "https://discord.gg/7KefGraTeq" }
+  ]
+};
+/* ========================= FIM DA CONFIGURAÇÃO ========================= */
+
+
+/* ----------------------------------------------------------
+   1. Aplica os textos e cores da configuração na página
+   ---------------------------------------------------------- */
+function hexToRgb(hex) {
+  const h = hex.replace("#", "");
+  const n = parseInt(h, 16);
+  return `${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}`;
+}
+
+function applyConfig() {
+  const root = document.documentElement.style;
+  root.setProperty("--bg", CONFIG.colors.background);
+  root.setProperty("--neon", CONFIG.colors.neon);
+  root.setProperty("--neon-rgb", hexToRgb(CONFIG.colors.neon));
+
+  document.title = `${CONFIG.brandName} | ${CONFIG.title}`;
+  document.getElementById("brand").textContent = CONFIG.brandName;
+  document.getElementById("title").textContent = CONFIG.title;
+  document.getElementById("subtitle").textContent = CONFIG.subtitle;
+  document.getElementById("footer").textContent = CONFIG.footer;
+
+  // Foto/logo ou iniciais
+  const avatar = document.getElementById("avatar");
+  if (CONFIG.avatarImage) {
+    const img = document.createElement("img");
+    img.src = CONFIG.avatarImage;
+    img.alt = CONFIG.brandName;
+    avatar.appendChild(img);
+  } else {
+    avatar.textContent = CONFIG.avatarInitials;
+  }
+
+  // Botões dos produtos (abrem em nova aba)
+  const links = document.getElementById("links");
+  CONFIG.products.forEach(product => {
+    const a = document.createElement("a");
+    a.className = "btn";
+    a.href = product.url;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.textContent = product.name.toUpperCase();
+    links.appendChild(a);
+  });
+}
+
+/* ----------------------------------------------------------
+   2. Animação de fundo: folhas, raízes e partículas
+   ---------------------------------------------------------- */
+const canvas = document.getElementById("bg");
+const ctx = canvas.getContext("2d");
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+let W = 0, H = 0, dpr = 1;
+let leaves = [];
+let particles = [];
+let branches = [];
+let CONFIG_RGB = "168, 85, 247";
+let lastTime = 0;
+
+const rnd = (min, max) => min + Math.random() * (max - min);
+
+// Cria uma folha com posição, tamanho e velocidade aleatórios
+function createLeaf(startAnywhere) {
+  return {
+    baseX: rnd(0, W),
+    y: startAnywhere ? rnd(0, H) : H + 40,
+    size: rnd(6, 13),
+    rot: rnd(0, Math.PI * 2),
+    spin: rnd(-0.004, 0.004),
+    speed: rnd(0.12, 0.32),
+    sway: rnd(12, 34),
+    swaySpeed: rnd(0.2, 0.5),
+    phase: rnd(0, Math.PI * 2),
+    alpha: rnd(0.15, 0.45)
+  };
+}
+
+// Gera ramificações de raízes/galhos que crescem da base da tela
+function growBranch(x, y, angle, length, depth) {
+  if (depth > 4 || length < 10) return;
+  const x2 = x + Math.cos(angle) * length;
+  const y2 = y + Math.sin(angle) * length;
+  branches.push({ x1: x, y1: y, x2, y2, width: Math.max(0.5, 3.6 - depth * 0.7) });
+  const spread = rnd(0.3, 0.6);
+  growBranch(x2, y2, angle - spread, length * rnd(0.64, 0.78), depth + 1);
+  growBranch(x2, y2, angle + spread, length * rnd(0.64, 0.78), depth + 1);
+}
+
+function buildScene() {
+  const count = Math.max(10, Math.min(22, Math.round((W * H) / 50000)));
+  leaves = Array.from({ length: count }, () => createLeaf(true));
+  particles = Array.from({ length: count * 2 }, () => ({
+    x: rnd(0, W),
+    y: rnd(0, H),
+    r: rnd(0.5, 1.8),
+    vy: rnd(0.04, 0.14),
+    phase: rnd(0, Math.PI * 2),
+    alpha: rnd(0.2, 0.7)
+  }));
+
+  // Raízes/galhos nas laterais inferiores
+  branches = [];
+  growBranch(W * 0.08, H + 10, -Math.PI / 2 + 0.35, H * 0.22, 0);
+  growBranch(W * 0.92, H + 10, -Math.PI / 2 - 0.35, H * 0.22, 0);
+}
+
+function resize() {
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+  W = window.innerWidth;
+  H = window.innerHeight;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  buildScene();
+}
+
+// Desenha uma folha com nervura e brilho
+function drawLeaf(x, y, size, rot, alpha) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(rot);
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.bezierCurveTo(size * 0.5, -size * 0.7, size * 1.3, -size * 0.4, size * 1.6, 0);
+  ctx.bezierCurveTo(size * 1.3, size * 0.4, size * 0.5, size * 0.7, 0, 0);
+  ctx.fillStyle = `rgba(${CONFIG_RGB}, ${alpha})`;
+  ctx.shadowColor = `rgba(${CONFIG_RGB}, 0.8)`;
+  ctx.shadowBlur = 12;
+  ctx.fill();
+  // nervura
+  ctx.shadowBlur = 0;
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.lineTo(size * 1.4, 0);
+  ctx.strokeStyle = `rgba(${CONFIG_RGB}, ${alpha * 0.6})`;
+  ctx.lineWidth = 0.6;
+  ctx.stroke();
+  ctx.restore();
+}
+
+function frame(time) {
+  const dt = Math.min((time - lastTime) / 16.67 || 1, 3);
+  lastTime = time;
+  const t = time / 1000;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Raízes/galhos com leve pulsação
+  ctx.lineCap = "round";
+  const branchAlpha = 0.14 + Math.sin(t * 0.5) * 0.03;
+  branches.forEach(b => {
+    ctx.beginPath();
+    ctx.moveTo(b.x1, b.y1);
+    ctx.lineTo(b.x2, b.y2);
+    ctx.strokeStyle = `rgba(${CONFIG_RGB}, ${branchAlpha})`;
+    ctx.lineWidth = b.width;
+    ctx.stroke();
+  });
+
+  // Partículas
+  particles.forEach(p => {
+    p.y -= p.vy * dt;
+    if (p.y < -5) { p.y = H + 5; p.x = rnd(0, W); }
+    const a = p.alpha * (0.6 + Math.sin(t * 1.2 + p.phase) * 0.4);
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${CONFIG_RGB}, ${a})`;
+    ctx.fill();
+  });
+
+  // Folhas flutuando lentamente
+  leaves.forEach((l, i) => {
+    l.y -= l.speed * dt;
+    l.rot += l.spin * dt;
+    if (l.y < -40) {
+      leaves[i] = createLeaf(false);
+      return;
+    }
+    const x = l.baseX + Math.sin(t * l.swaySpeed + l.phase) * l.sway;
+    drawLeaf(x, l.y, l.size, l.rot, l.alpha);
+  });
+
+  if (!reduceMotion) requestAnimationFrame(frame);
+}
+
+/* ----------------------------------------------------------
+   3. Inicialização
+   ---------------------------------------------------------- */
+applyConfig();
+CONFIG_RGB = hexToRgb(CONFIG.colors.neon);
+resize();
+window.addEventListener("resize", resize);
+requestAnimationFrame(frame);
+
+// Se o usuário preferir menos movimento, desenha um único quadro estático
+if (reduceMotion) frame(0);
+</script>
+
+</body>
+</html>
