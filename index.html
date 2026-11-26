@@ -1,467 +1,571 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="description" content="ROMA - Conheça nossas ferramentas e soluções.">
-<title>ROMA | Meus Produtos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#09060e">
+<meta name="description" content="THE ROMA — Loja digital, comunidade e otimização de PC.">
+
+<title>THE ROMA | Links Oficiais</title>
 
 <style>
-/* ==========================================================
-   ESTILOS
-   As cores principais vêm da CONFIG (JavaScript) via variáveis CSS.
-   ========================================================== */
+
 :root {
-  --bg: #0D0716;
-  --neon: #A855F7;
-  --neon-rgb: 168, 85, 247;
-  --text: #F3E8FF;
-  --muted: #B9A3D6;
+    --bg: #09060e;
+    --purple: #a855f7;
+    --text: #f5f0ff;
+    --muted: #a59ab7;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-html, body {
-  min-height: 100%;
-  background: var(--bg);
-  color: var(--text);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  min-height: 100vh;
-  overflow-x: hidden;
-  display: flex;
-  justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
 }
 
-/* Canvas de fundo com folhas, raízes e partículas */
-#bg {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
+canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
 }
 
-/* Brilhos roxos discretos que se movem devagar */
 .glow {
-  position: fixed;
-  width: 55vmax;
-  height: 55vmax;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(var(--neon-rgb), 0.18), transparent 70%);
-  filter: blur(40px);
-  z-index: 0;
-  pointer-events: none;
-  animation: drift 20s ease-in-out infinite alternate;
-}
-.glow.g1 { top: -18vmax; left: -15vmax; }
-.glow.g2 { bottom: -22vmax; right: -18vmax; animation-delay: -8s; }
-
-@keyframes drift {
-  from { transform: translate(0, 0); }
-  to   { transform: translate(5vmax, 4vmax); }
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(
+        circle,
+        rgba(168, 85, 247, 0.14),
+        transparent 70%
+    );
+    pointer-events: none;
+    animation: float 10s ease-in-out infinite alternate;
 }
 
-/* Conteúdo principal */
-main {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 480px;
-  min-height: 100vh;
-  padding: 56px 22px 28px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.glow.top {
+    top: -250px;
+    left: -200px;
 }
 
-/* Foto ou logotipo */
-.avatar {
-  width: 112px;
-  height: 112px;
-  border-radius: 50%;
-  border: 2px solid var(--neon);
-  background: #1A0F2B;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--neon);
-  animation: pulse 4s ease-in-out infinite;
-}
-.avatar img { width: 100%; height: 100%; object-fit: cover; }
-
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 16px rgba(var(--neon-rgb), 0.35); }
-  50%      { box-shadow: 0 0 34px rgba(var(--neon-rgb), 0.6); }
+.glow.bottom {
+    bottom: -250px;
+    right: -200px;
 }
 
-.brand {
-  margin-top: 20px;
-  font-size: 0.8rem;
-  letter-spacing: 6px;
-  color: var(--neon);
-  text-transform: uppercase;
+.container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 450px;
+    padding: 40px 24px;
+    text-align: center;
+    animation: entrance 0.8s ease both;
+}
+
+/* LOGOTIPO */
+
+.logo {
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    border: 1px solid #a855f760;
+    background: linear-gradient(145deg, #21112f, #100b18);
+    box-shadow: 0 0 40px #a855f725;
+    overflow: hidden;
+}
+
+.logo svg {
+    width: 72px;
+    height: 72px;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.official {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: var(--purple);
+    margin-bottom: 14px;
+}
+
+.official::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background: var(--purple);
+    border-radius: 50%;
+    box-shadow: 0 0 12px var(--purple);
 }
 
 h1 {
-  margin-top: 8px;
-  font-size: clamp(1.5rem, 6vw, 2rem);
-  font-weight: 700;
-  letter-spacing: 4px;
-  text-align: center;
-  text-shadow: 0 0 18px rgba(var(--neon-rgb), 0.55);
+    font-size: 36px;
+    letter-spacing: 5px;
+    font-weight: 900;
 }
 
 .subtitle {
-  margin-top: 12px;
-  font-size: 0.95rem;
-  color: var(--muted);
-  text-align: center;
-  line-height: 1.5;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+    margin-top: 12px;
 }
 
-/* Lista de botões */
+/* LINKS */
+
 .links {
-  width: 100%;
-  margin-top: 34px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 35px;
 }
 
-.btn {
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 20px 16px;
-  border-radius: 16px;
-  border: 1px solid rgba(var(--neon-rgb), 0.5);
-  background: linear-gradient(135deg, rgba(var(--neon-rgb), 0.16), rgba(88, 28, 135, 0.28));
-  color: var(--text);
-  text-decoration: none;
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, background 0.35s ease;
-  -webkit-tap-highlight-color: transparent;
+.link {
+    --accent: #a855f7;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 17px;
+    min-height: 85px;
+    text-decoration: none;
+    text-align: left;
+    color: white;
+    border: 1px solid #ffffff12;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #1c1226, #100c17);
+    overflow: hidden;
+    transition: 0.3s ease;
 }
 
-/* Reflexo de brilho que passa pelo botão */
-.btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -75%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.22), transparent);
-  transform: skewX(-20deg);
-  transition: left 0.7s ease;
+.link:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 0 8px 35px #00000050;
 }
 
-.btn:hover {
-  transform: translateY(-3px) scale(1.02);
-  border-color: var(--neon);
-  box-shadow: 0 0 26px rgba(var(--neon-rgb), 0.5);
-  background: linear-gradient(135deg, rgba(var(--neon-rgb), 0.3), rgba(88, 28, 135, 0.4));
+.link:active {
+    transform: scale(0.97);
 }
 
-.btn:hover::before { left: 125%; }
-
-.btn:focus-visible {
-  outline: 2px solid var(--neon);
-  outline-offset: 4px;
+.link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
 }
 
-/* Efeito ao clicar */
-.btn:active {
-  transform: scale(0.97);
-  transition-duration: 0.1s;
+.link::before {
+    content: "";
+    position: absolute;
+    left: -100%;
+    top: 0;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #ffffff10,
+        transparent
+    );
+    transform: skewX(-20deg);
+    transition: 0.7s;
 }
 
-/* Rodapé */
+.link:hover::before {
+    left: 150%;
+}
+
+.store {
+    --accent: #a855f7;
+    border-color: #a855f750;
+    background: linear-gradient(135deg, #32174b, #171020);
+}
+
+.discord {
+    --accent: #818cf8;
+}
+
+.optimizer {
+    --accent: #facc15;
+}
+
+.icon {
+    flex-shrink: 0;
+    width: 47px;
+    height: 47px;
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff08;
+    color: var(--accent);
+    border: 1px solid #ffffff0c;
+}
+
+.icon svg {
+    width: 25px;
+    height: 25px;
+}
+
+.info {
+    flex: 1;
+    min-width: 0;
+}
+
+.info h2 {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.7px;
+}
+
+.info p {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 7px;
+    line-height: 1.5;
+}
+
+.arrow {
+    color: var(--accent);
+    font-size: 20px;
+    transition: transform 0.3s;
+}
+
+.link:hover .arrow {
+    transform: translateX(4px);
+}
+
+/* RODAPÉ */
+
 footer {
-  margin-top: auto;
-  padding-top: 40px;
-  font-size: 0.72rem;
-  letter-spacing: 1.5px;
-  color: #7E6A99;
-  text-align: center;
+    margin-top: 40px;
+    color: #736581;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    line-height: 2;
 }
 
-/* Respeita quem prefere menos animação */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation: none !important;
-    transition: none !important;
-  }
+.line {
+    width: 45px;
+    height: 2px;
+    margin: 0 auto 20px;
+    background: linear-gradient(90deg, transparent, var(--purple), transparent);
 }
+
+@keyframes entrance {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    from { transform: translate(0, 0); }
+    to { transform: translate(80px, 60px); }
+}
+
+@media (max-width: 380px) {
+    .container {
+        padding: 30px 16px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    .link {
+        padding: 13px;
+    }
+
+    .info h2 {
+        font-size: 11px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- Fundo animado -->
-<canvas id="bg" aria-hidden="true"></canvas>
-<div class="glow g1" aria-hidden="true"></div>
-<div class="glow g2" aria-hidden="true"></div>
+<canvas id="particles" aria-hidden="true"></canvas>
 
-<main>
-  <div class="avatar" id="avatar"></div>
-  <div class="brand" id="brand"></div>
-  <h1 id="title"></h1>
-  <p class="subtitle" id="subtitle"></p>
+<div class="glow top"></div>
+<div class="glow bottom"></div>
 
-  <nav class="links" id="links" aria-label="Produtos"></nav>
+<main class="container">
 
-  <footer id="footer"></footer>
+    <!-- LOGOTIPO -->
+    <div class="logo">
+
+        <!-- Para colocar sua logo, substitua o SVG por:
+        <img src="logo.png" alt="THE ROMA">
+        -->
+
+        <svg viewBox="0 0 100 100"
+             fill="currentColor"
+             color="#ffffff"
+             aria-label="Capacete romano">
+
+            <path d="M22 43
+                     C22 17 47 7 65 15
+                     C83 22 88 37 82 53
+                     L70 48
+                     L70 65
+                     L82 82
+                     L64 77
+                     L51 59
+                     L42 59
+                     L42 84
+                     L25 72
+                     L25 49 Z"/>
+
+            <path d="M15 35
+                     C14 8 49 -2 75 10
+                     L78 19
+                     C48 9 29 21 25 39 Z"
+                  fill="#a855f7"/>
+
+        </svg>
+
+    </div>
+
+    <div class="official">LINKS OFICIAIS</div>
+
+    <h1>THE ROMA</h1>
+
+    <p class="subtitle">
+        Tecnologia, desempenho e personalização.
+        <br>
+        Conheça nosso ecossistema digital.
+    </p>
+
+    <nav class="links" aria-label="Links oficiais">
+
+        <!-- ROMA STORE -->
+
+        <a class="link store"
+           href="https://the-roma-store.vercel.app/"
+           target="_blank"
+           rel="noopener noreferrer">
+
+            <div class="icon">
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="1.7"
+                     stroke-linecap="round"
+                     stroke-linejoin="round">
+
+                    <rect x="3" y="7" width="18"
+                          height="14" rx="3"/>
+
+                    <path d="M8 8V6a4 4 0 0 1 8 0v2"/>
+
+                </svg>
+            </div>
+
+            <div class="info">
+                <h2>ROMA STORE</h2>
+                <p>Aplicativos, Windows e ferramentas digitais.</p>
+            </div>
+
+            <span class="arrow">↗</span>
+
+        </a>
+
+        <!-- DISCORD NORMAL -->
+
+        <a class="link discord"
+           href="https://discord.gg/7KefGraTeq"
+           target="_blank"
+           rel="noopener noreferrer">
+
+            <div class="icon">
+                <svg viewBox="0 0 24 24"
+                     fill="currentColor">
+
+                    <path d="M20.3 4.4a20 20 0 0 0-5-1.5
+                    l-.6 1.2a18 18 0 0 0-5.4 0
+                    l-.6-1.2a20 20 0 0 0-5 1.5
+                    C.5 9.1-.3 13.7.2 18.2
+                    a20 20 0 0 0 6.1 3.1
+                    l1.3-2.1-1.8-.9.4-.3
+                    a15 15 0 0 0 11.6 0l.4.3-1.8.9
+                    1.3 2.1a20 20 0 0 0 6.1-3.1
+                    c.6-5.2-1-9.8-3.5-13.8z
+                    M8.1 15.5c-1.1 0-2-1-2-2.2
+                    s.9-2.2 2-2.2 2 1 2 2.2
+                    -.9 2.2-2 2.2z
+                    m7.8 0c-1.1 0-2-1-2-2.2
+                    s.9-2.2 2-2.2 2 1 2 2.2
+                    -.9 2.2-2 2.2z"/>
+
+                </svg>
+            </div>
+
+            <div class="info">
+                <h2>COMUNIDADE ROMA</h2>
+                <p>Entre para nosso servidor oficial.</p>
+            </div>
+
+            <span class="arrow">↗</span>
+
+        </a>
+
+        <!-- DISCORD OTIMIZAÇÃO -->
+
+        <a class="link optimizer"
+           href="https://discord.gg/etkZdnyWyR"
+           target="_blank"
+           rel="noopener noreferrer">
+
+            <div class="icon">
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="1.8"
+                     stroke-linejoin="round">
+
+                    <path d="M13 2 3 14h8l-1 8
+                             11-12h-8l1-8z"/>
+
+                </svg>
+            </div>
+
+            <div class="info">
+                <h2>DISCORD — OTIMIZAÇÃO</h2>
+                <p>Desempenho, FPS, suporte e otimizações de PC.</p>
+            </div>
+
+            <span class="arrow">↗</span>
+
+        </a>
+
+    </nav>
+
+    <footer>
+        <div class="line"></div>
+        THE ROMA © 2026
+        <br>
+        TODOS OS DIREITOS RESERVADOS
+    </footer>
+
 </main>
 
 <script>
-/* ==========================================================
-   ÁREA DE CONFIGURAÇÃO
-   Edite apenas este bloco para trocar nomes, links, cores e textos.
-   ========================================================== */
-const CONFIG = {
-  // Nome da marca exibido acima do título
-  brandName: "ROMA",
 
-  // Foto ou logotipo: coloque o caminho ou URL da imagem.
-  // Exemplo: "minha-foto.jpg" ou "https://exemplo.com/logo.png"
-  // Se deixar vazio, aparecerão as iniciais abaixo.
-  avatarImage: "",
-  avatarInitials: "R",
+/* PARTÍCULAS ANIMADAS */
 
-  // Textos do cabeçalho
-  title: "MEUS PRODUTOS",
-  subtitle: "Conheça nossas ferramentas e soluções",
-
-  // Texto do rodapé
-  footer: "© 2026 - TODOS OS DIREITOS RESERVADOS",
-
-  // Cores (formato hexadecimal)
-  colors: {
-    background: "#0D0716",
-    neon: "#A855F7"
-  },
-
-  // Produtos: cada um vira um botão, na ordem da lista.
-  // Os nomes são exibidos em maiúsculas automaticamente.
-  products: [
-    { name: "ROMA STORE", url: "https://the-roma-store.vercel.app/" },
-    { name: "DISCORD", url: "https://discord.gg/etkZdnyWyR" }
-  ]
-};
-/* ========================= FIM DA CONFIGURAÇÃO ========================= */
-
-
-/* ----------------------------------------------------------
-   1. Aplica os textos e cores da configuração na página
-   ---------------------------------------------------------- */
-function hexToRgb(hex) {
-  const h = hex.replace("#", "");
-  const n = parseInt(h, 16);
-  return `${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}`;
-}
-
-function applyConfig() {
-  const root = document.documentElement.style;
-  root.setProperty("--bg", CONFIG.colors.background);
-  root.setProperty("--neon", CONFIG.colors.neon);
-  root.setProperty("--neon-rgb", hexToRgb(CONFIG.colors.neon));
-
-  document.title = `${CONFIG.brandName} | ${CONFIG.title}`;
-  document.getElementById("brand").textContent = CONFIG.brandName;
-  document.getElementById("title").textContent = CONFIG.title;
-  document.getElementById("subtitle").textContent = CONFIG.subtitle;
-  document.getElementById("footer").textContent = CONFIG.footer;
-
-  // Foto/logo ou iniciais
-  const avatar = document.getElementById("avatar");
-  if (CONFIG.avatarImage) {
-    const img = document.createElement("img");
-    img.src = CONFIG.avatarImage;
-    img.alt = CONFIG.brandName;
-    avatar.appendChild(img);
-  } else {
-    avatar.textContent = CONFIG.avatarInitials;
-  }
-
-  // Botões dos produtos (abrem em nova aba)
-  const links = document.getElementById("links");
-  CONFIG.products.forEach(product => {
-    const a = document.createElement("a");
-    a.className = "btn";
-    a.href = product.url;
-    a.target = "_blank";
-    a.rel = "noopener noreferrer";
-    a.textContent = product.name.toUpperCase();
-    links.appendChild(a);
-  });
-}
-
-/* ----------------------------------------------------------
-   2. Animação de fundo: folhas, raízes e partículas
-   ---------------------------------------------------------- */
-const canvas = document.getElementById("bg");
+const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-let W = 0, H = 0, dpr = 1;
-let leaves = [];
 let particles = [];
-let branches = [];
-let CONFIG_RGB = "168, 85, 247";
-let lastTime = 0;
+let width;
+let height;
 
-const rnd = (min, max) => min + Math.random() * (max - min);
-
-// Cria uma folha com posição, tamanho e velocidade aleatórios
-function createLeaf(startAnywhere) {
-  return {
-    baseX: rnd(0, W),
-    y: startAnywhere ? rnd(0, H) : H + 40,
-    size: rnd(6, 13),
-    rot: rnd(0, Math.PI * 2),
-    spin: rnd(-0.004, 0.004),
-    speed: rnd(0.12, 0.32),
-    sway: rnd(12, 34),
-    swaySpeed: rnd(0.2, 0.5),
-    phase: rnd(0, Math.PI * 2),
-    alpha: rnd(0.15, 0.45)
-  };
-}
-
-// Gera ramificações de raízes/galhos que crescem da base da tela
-function growBranch(x, y, angle, length, depth) {
-  if (depth > 4 || length < 10) return;
-  const x2 = x + Math.cos(angle) * length;
-  const y2 = y + Math.sin(angle) * length;
-  branches.push({ x1: x, y1: y, x2, y2, width: Math.max(0.5, 3.6 - depth * 0.7) });
-  const spread = rnd(0.3, 0.6);
-  growBranch(x2, y2, angle - spread, length * rnd(0.64, 0.78), depth + 1);
-  growBranch(x2, y2, angle + spread, length * rnd(0.64, 0.78), depth + 1);
-}
-
-function buildScene() {
-  const count = Math.max(10, Math.min(22, Math.round((W * H) / 50000)));
-  leaves = Array.from({ length: count }, () => createLeaf(true));
-  particles = Array.from({ length: count * 2 }, () => ({
-    x: rnd(0, W),
-    y: rnd(0, H),
-    r: rnd(0.5, 1.8),
-    vy: rnd(0.04, 0.14),
-    phase: rnd(0, Math.PI * 2),
-    alpha: rnd(0.2, 0.7)
-  }));
-
-  // Raízes/galhos nas laterais inferiores
-  branches = [];
-  growBranch(W * 0.08, H + 10, -Math.PI / 2 + 0.35, H * 0.22, 0);
-  growBranch(W * 0.92, H + 10, -Math.PI / 2 - 0.35, H * 0.22, 0);
-}
+const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+).matches;
 
 function resize() {
-  dpr = Math.min(window.devicePixelRatio || 1, 2);
-  W = window.innerWidth;
-  H = window.innerHeight;
-  canvas.width = W * dpr;
-  canvas.height = H * dpr;
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  buildScene();
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    width = window.innerWidth;
+    height = window.innerHeight;
+
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const amount = width < 600 ? 30 : 65;
+
+    particles = Array.from({ length: amount }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        size: Math.random() * 1.6 + 0.4,
+        speed: Math.random() * 0.25 + 0.08,
+        opacity: Math.random() * 0.5 + 0.1
+    }));
+
 }
 
-// Desenha uma folha com nervura e brilho
-function drawLeaf(x, y, size, rot, alpha) {
-  ctx.save();
-  ctx.translate(x, y);
-  ctx.rotate(rot);
-  ctx.beginPath();
-  ctx.moveTo(0, 0);
-  ctx.bezierCurveTo(size * 0.5, -size * 0.7, size * 1.3, -size * 0.4, size * 1.6, 0);
-  ctx.bezierCurveTo(size * 1.3, size * 0.4, size * 0.5, size * 0.7, 0, 0);
-  ctx.fillStyle = `rgba(${CONFIG_RGB}, ${alpha})`;
-  ctx.shadowColor = `rgba(${CONFIG_RGB}, 0.8)`;
-  ctx.shadowBlur = 12;
-  ctx.fill();
-  // nervura
-  ctx.shadowBlur = 0;
-  ctx.beginPath();
-  ctx.moveTo(0, 0);
-  ctx.lineTo(size * 1.4, 0);
-  ctx.strokeStyle = `rgba(${CONFIG_RGB}, ${alpha * 0.6})`;
-  ctx.lineWidth = 0.6;
-  ctx.stroke();
-  ctx.restore();
-}
+function animate() {
 
-function frame(time) {
-  const dt = Math.min((time - lastTime) / 16.67 || 1, 3);
-  lastTime = time;
-  const t = time / 1000;
+    ctx.clearRect(0, 0, width, height);
 
-  ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
 
-  // Raízes/galhos com leve pulsação
-  ctx.lineCap = "round";
-  const branchAlpha = 0.14 + Math.sin(t * 0.5) * 0.03;
-  branches.forEach(b => {
-    ctx.beginPath();
-    ctx.moveTo(b.x1, b.y1);
-    ctx.lineTo(b.x2, b.y2);
-    ctx.strokeStyle = `rgba(${CONFIG_RGB}, ${branchAlpha})`;
-    ctx.lineWidth = b.width;
-    ctx.stroke();
-  });
+        if (!reduceMotion) {
+            p.y -= p.speed;
+        }
 
-  // Partículas
-  particles.forEach(p => {
-    p.y -= p.vy * dt;
-    if (p.y < -5) { p.y = H + 5; p.x = rnd(0, W); }
-    const a = p.alpha * (0.6 + Math.sin(t * 1.2 + p.phase) * 0.4);
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(${CONFIG_RGB}, ${a})`;
-    ctx.fill();
-  });
+        if (p.y < -10) {
+            p.y = height + 10;
+            p.x = Math.random() * width;
+        }
 
-  // Folhas flutuando lentamente
-  leaves.forEach((l, i) => {
-    l.y -= l.speed * dt;
-    l.rot += l.spin * dt;
-    if (l.y < -40) {
-      leaves[i] = createLeaf(false);
-      return;
+        ctx.beginPath();
+
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+
+        ctx.fillStyle = `rgba(168, 85, 247, ${p.opacity})`;
+
+        ctx.fill();
+
+    });
+
+    if (!reduceMotion) {
+        requestAnimationFrame(animate);
     }
-    const x = l.baseX + Math.sin(t * l.swaySpeed + l.phase) * l.sway;
-    drawLeaf(x, l.y, l.size, l.rot, l.alpha);
-  });
 
-  if (!reduceMotion) requestAnimationFrame(frame);
 }
 
-/* ----------------------------------------------------------
-   3. Inicialização
-   ---------------------------------------------------------- */
-applyConfig();
-CONFIG_RGB = hexToRgb(CONFIG.colors.neon);
-resize();
-window.addEventListener("resize", resize);
-requestAnimationFrame(frame);
+window.addEventListener("resize", () => {
+    resize();
+    if (reduceMotion) animate();
+});
 
-// Se o usuário preferir menos movimento, desenha um único quadro estático
-if (reduceMotion) frame(0);
+resize();
+animate();
+
 </script>
 
 </body>
